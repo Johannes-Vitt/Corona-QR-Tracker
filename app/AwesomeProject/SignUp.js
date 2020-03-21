@@ -32,13 +32,13 @@ export default class SignUp extends Component {
             <View style={styles.container}>
                 <Image
                     style={styles.image}
-                    source={require('./ressources/qr-code-green-transparent.png')}
+                    source={require('./ressources/Logo_new.png')}
                 />
                 <TextInput onChangeText={this.onChangeEmail} style={styles.input} placeholder='E-Mail Adresse' placeholderTextColor='grey'></TextInput>
                 <Text style={styles.oder}>ODER</Text>
                 <TextInput onChangeText={this.onChangeTel} style={styles.input} placeholder='Telefonnummer' placeholderTextColor='grey'></TextInput>
-                <Button rounded style={styles.button} onPress={this.proceed}>
-                    <Text style={styles.butonText}>SCANNEN</Text>
+                <Button style={styles.button} onPress={this.proceed}>
+                    <Text style={styles.buttonText}>SCANNEN</Text>
                 </Button>
             </View> );
     };
@@ -78,11 +78,11 @@ const styles = StyleSheet.create({
         marginTop: 40,
         textAlign: 'center',
         fontSize: 20,
+        justifyContent: 'center'
     },
-    butonText: {
+    buttonText: {
         color: 'white',
         fontSize: 20,
-        textAlign: 'center'
     },
     image:{
         width: 200, 
