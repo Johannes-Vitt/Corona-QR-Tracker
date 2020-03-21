@@ -1,5 +1,6 @@
 import React, { Component } from "react"
-import { TextInput, Text, View, StyleSheet, Button, TouchableOpacity, AsyncStorage } from "react-native"
+import { TextInput, Text, View, StyleSheet, TouchableOpacity, AsyncStorage } from "react-native"
+import { Button } from 'react-native-elements';
 
 const STORAGE_KEY = '@save_name'
 
@@ -34,7 +35,7 @@ export default class SignUp extends Component {
                 <TextInput onChangeText={this.onChangeEmail} style={styles.input} placeholder='E-Mail Adresse'></TextInput>
                 <Text>ODER</Text>
                 <TextInput onChangeText={this.onChangeTel} style={styles.input} placeholder='Telefonnummer'></TextInput>
-                <Button title="Weiter" onPress={this.proceed}></Button>
+                <Button title="Weiter " type="outline" onPress={this.proceed}></Button>
             </View >);
     };
 };
