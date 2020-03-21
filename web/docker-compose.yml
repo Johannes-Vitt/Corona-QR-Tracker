@@ -1,0 +1,20 @@
+version: "2"
+services:
+    mongo_qrona:
+      container_name: mongo_qrona
+      image: 'bitnami/mongodb:latest'
+      ports:
+        - "${DB_PORT}:${DB_PORT}"
+      environment:
+        - MONGODB_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+        - MONGODB_USERNAME=${DB_USER}
+        - MONGODB_PASSWORD=${DB_PASSWORD}
+        - MONGODB_DATABASE=${DB_NAME}
+    app:
+        container_name: qrona
+        restart: always
+        build: .
+        ports:
+        - "2222:3000"
+        links:
+        - mongo_qrona
