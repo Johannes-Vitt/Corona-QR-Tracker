@@ -19,6 +19,10 @@ router.get('/', async (req, res) => {
     }
 })
 
+router.get('/:code', getUser, (req, res) => {
+    res.json(res.user)
+})
+
 // Creating a User
 router.post('/', async (req, res) => {
     hash = req.body.hash
@@ -63,5 +67,21 @@ router.post('/', async (req, res) => {
         res.status(400).json({ message: err.message })
     }
 })
+
+async function getUser(req, res, next) {
+    try {
+      console.log("hi")
+      console.log(req.params.code)
+      var user = await User.findOne()
+      if (user == null) {
+        console.log("nullll")
+        return res.status(404).json({ message: 'Cant find user'})
+      }
+    } catch(err){
+        console.log("catch")
+      return res.status(500).json({ message: err.message })
+    }
+}
+
 
 module.exports = router 
