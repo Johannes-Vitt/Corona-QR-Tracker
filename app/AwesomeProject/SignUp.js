@@ -30,41 +30,47 @@ export default class SignUp extends Component {
 
     render() {
         return (
-            <LinearGradient start={{x: 1, y: 0}} end={{x: 0, y: 1}} colors={['#76D7EC','#7AEA95', '#42EABE']} style={styles.linearGradient}>
+            <View style={styles.container}>
                 <Image
-                    style={{width: 150, height: 150}}
-                    source={require('./ressources/qr-code-white-transparent-soft.png')}
-                    //source={require('./ressources/qr-icon.png')}
-                    //source={require('./ressources/Icon_full.png')}
+                    style={{width: 150, height: 150, marginBottom: 110}}
+                    source={require('./ressources/qr-code-green-transparent.png')}
                 />
-                <TextInput onChangeText={this.onChangeEmail} style={styles.input} placeholder='E-Mail Adresse' placeholderTextColor='white'></TextInput>
+                <TextInput onChangeText={this.onChangeEmail} style={styles.input} placeholder='E-Mail Adresse' placeholderTextColor='grey'></TextInput>
                 <Text style={styles.oder}>ODER</Text>
-                <TextInput onChangeText={this.onChangeTel} style={styles.input} placeholder='Telefonnummer' placeholderTextColor='white'></TextInput>
-                <Button color="#000000"title="Weiter" type="outline" onPress={this.proceed}></Button>
-            </LinearGradient> );
+                <TextInput onChangeText={this.onChangeTel} style={styles.input} placeholder='Telefonnummer' placeholderTextColor='grey'></TextInput>
+                <Button color="#000000"title="Scannen" type="outline" onPress={this.proceed}></Button>
+            </View> );
     };
 };
 
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#F7F7F7',
+        backgroundColor: '#FAFAFA',
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
     },
     oder:{
-        color: 'white'
+        color: '#42EABE',
+        fontSize: 20
     },
     input: {
-        fontSize: 30,
-        marginTop: 50,
-        marginBottom: 50,
-        color: 'white',
+        backgroundColor: 'white',
+        width: '80%',
+        borderRadius: 10,
+        padding: 7,
+        fontSize: 20,
+        marginTop: 20,
+        marginBottom: 20,
+        textAlign: 'center',
+        color: '#A9A9A9',
+        borderWidth: 1,
+        borderColor: '#42EABE'
     },
     button: {
         fontSize: 50,
-        color: '#000000',
+        color: '#42EABE',
         backgroundColor: '#147efb'
     },
     linearGradient: {
