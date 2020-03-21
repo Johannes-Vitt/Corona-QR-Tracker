@@ -62,8 +62,8 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         padding: 7,
         fontSize: 20,
-        marginTop: 20,
-        marginBottom: 20,
+        marginTop: 10,
+        marginBottom: 10,
         textAlign: 'center',
         color: '#A9A9A9',
         borderWidth: 1,
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         padding: 8,
         fontSize: 50,
-        marginTop: 40,
+        marginTop: 50,
         textAlign: 'center',
         fontSize: 20,
         justifyContent: 'center'
@@ -85,9 +85,10 @@ const styles = StyleSheet.create({
         fontSize: 20,
     },
     image:{
-        width: 200, 
-        height: 200, 
-        marginBottom: 90, 
-        marginTop: 90
+        resizeMode: 'contain',
+        width: 230, 
+        height: 230, 
+        marginBottom: 80, 
+        marginTop: 80
     },
 });
