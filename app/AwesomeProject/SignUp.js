@@ -38,7 +38,7 @@ export default class SignUp extends Component {
                 <Text style={styles.oder}>ODER</Text>
                 <TextInput onChangeText={this.onChangeTel} style={styles.input} placeholder='Telefonnummer' placeholderTextColor='grey'></TextInput>
                 <Button rounded style={styles.button} onPress={this.proceed}>
-                    <Text>Scannen</Text>
+                    <Text style={styles.butonText}>Scannen</Text>
                 </Button>
             </View> );
     };
@@ -73,12 +73,16 @@ const styles = StyleSheet.create({
         backgroundColor: '#42EABE',
         width: '80%',
         borderRadius: 10,
-        padding: 11.8,
+        padding: 8,
         fontSize: 50,
         marginTop: 40,
         textAlign: 'center',
-        color: '#A9A9A9',
         fontSize: 20,
+    },
+    butonText: {
+        color: 'white',
+        fontSize: 20,
+        textAlign: 'center'
     },
     image:{
         width: 200, 
