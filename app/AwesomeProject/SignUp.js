@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { Container, Header, Content, Button, Text } from 'native-base';
-import { TextInput, View, StyleSheet, TouchableOpacity, AsyncStorage, Alert, Image } from "react-native"
+import { TextInput, View, StyleSheet, TouchableOpacity, AsyncStorage, Alert, Image, KeyboardAvoidingView } from "react-native"
 
 const STORAGE_KEY = '@save_name'
 
@@ -23,13 +23,13 @@ export default class SignUp extends Component {
             //TODO get the ID from the API
             this.props.createUser({ tel: this.state.tel, mail: this.state.email });
         } else {
-            Alert.alert("Informationen unvollständig","Bitte E-Mail Adresse oder Telefonnummer eingeben!");
+            Alert.alert("Informationen unvollständig", "Bitte E-Mail Adresse oder Telefonnummer eingeben!");
         }
     }
 
     render() {
         return (
-            <View style={styles.container}>
+            <KeyboardAvoidingView behavior={'padding'} style={styles.container}>
                 <Image
                     style={styles.image}
                     source={require('./ressources/Logo_new.png')}
@@ -40,7 +40,7 @@ export default class SignUp extends Component {
                 <Button style={styles.button} onPress={this.proceed}>
                     <Text style={styles.buttonText}>SCANNEN</Text>
                 </Button>
-            </View> );
+            </KeyboardAvoidingView>);
     };
 };
 
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
-    oder:{
+    oder: {
         color: '#42EABE',
         fontSize: 20
     },
@@ -84,11 +84,11 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 20,
     },
-    image:{
+    image: {
         resizeMode: 'contain',
-        width: 230, 
-        height: 230, 
-        marginBottom: 80, 
+        width: 230,
+        height: 230,
+        marginBottom: 80,
         marginTop: 80
     },
 });
