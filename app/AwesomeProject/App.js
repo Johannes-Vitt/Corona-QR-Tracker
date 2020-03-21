@@ -12,6 +12,7 @@ import {
   ScrollView,
   View,
   Text,
+  TextInput,
   StatusBar,
   AppRegistry,
   StyleSheet,
@@ -32,30 +33,100 @@ import QRCodeScanner from 'react-native-qrcode-scanner';
 const STORAGE_KEY = '@save_name'
 
 export default class QRona extends Component {
+  // TODO: remove text
+  state = {
+    text: '',
+    id: '',
+  }
+
+  componentDidMount() {
+    this.retrieveData()
+  }
+
+  retrieveData = async () => {
+    try {
+      const id = await AsyncStorage.getItem(STORAGE_KEY)
+
+      if (id !== null) {
+        this.setState({ id })
+      }
+    } catch (e) {
+      alert('Failed to load id.')
+    }
+  }
+
+  save = async id => {
+    try {
+      await AsyncStorage.setItem(STORAGE_KEY, id)
+      alert('Data successfully saved!')
+      this.setState({ id })
+    } catch (e) {
+      alert('Failed to save id.')
+    }
+  }
+
+  // TODO: remove
+  onChangeText = text => this.setState({ text })
+
+  // TODO: remove
+  onSubmitEditing = () => {
+    const onSave = this.save
+    const { text } = this.state
+
+    if (!text) return
+
+    onSave(text)
+    this.setState({ text: '' })
+  }
+
   onSuccess = e => {
     Linking.openURL(e.data).catch(err =>
       console.error('An error occured', err)
     );
   };
 
+
+
   render() {
-    return (
-      <QRCodeScanner
-        onRead={this.onSuccess}
-        topContent={
-          <Text style={styles.centerText}>
-            Go to{' '}
-            <Text style={styles.textBold}>wikipedia.org/wiki/QR_code</Text> on
+    const { text, id } = this.state
+
+    if (id !== '') {
+      return (
+        <QRCodeScanner
+          onRead={this.onSuccess}
+          topContent={
+            <Text style={styles.centerText}>
+              Go to{' '}
+              <Text style={styles.textBold}>wikipedia.org/wiki/QR_code</Text> on {this.state.id}
             your computer and scan the QRRRRRR code.
           </Text>
-        }
-        bottomContent={
-          <View>
-            <Text style={styles.buttonText}>OK. Got it!</Text>
-          </View>
-        }
-      />
-    );
+          }
+          bottomContent={
+            <View>
+              <TextInput
+                style={styles.centerText}
+
+                placeholder='Type your id, hit enter, and refresh'
+                onChangeText={this.onChangeText}
+                onSubmitEditing={this.onSubmitEditing}
+              />
+            </View>
+          }
+        />
+      );
+    } else {
+      return (
+        <View>
+          <TextInput
+            style={styles.centerText}
+
+            placeholder='Type your id, hit enter, and refresh'
+            onChangeText={this.onChangeText}
+            onSubmitEditing={this.onSubmitEditing}
+          />
+        </View>
+      );
+    }
   }
 }
 
