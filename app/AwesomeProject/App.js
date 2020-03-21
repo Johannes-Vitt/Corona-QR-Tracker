@@ -19,6 +19,7 @@ import {
   StyleSheet,
   AsyncStorage,
   Linking,
+  Dimensions,
 } from 'react-native';
 
 import {
@@ -28,6 +29,8 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+
+import { Overlay } from 'react-native-elements';
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
 
@@ -41,6 +44,7 @@ export default class QRona extends Component {
 
   state = {
     id: '',
+    greenOverlay: false,
   }
 
   componentDidMount() {
@@ -136,6 +140,10 @@ export default class QRona extends Component {
   }
   onSuccess = e => {
     this.createVisit(this.state.id, e.data);
+    this.setState({ id: this.state.id, greenOverlay: true });
+    setTimeout(function () {
+      this.setState({ id: this.state.id, greenOverlay: false });
+    }.bind(this), 500)
   };
 
 
@@ -145,22 +153,18 @@ export default class QRona extends Component {
 
     if (id !== '') {
       return (
-        <QRCodeScanner
-          onRead={this.onSuccess}
-          topContent={
-            <Text style={styles.centerText}>
-              Go to{' '}
-              <Text style={styles.textBold}>wikipedia.org/wiki/QR_code</Text> on {this.state.id}
-            your computer and scan the QRRRRRR code.
-          </Text>
-          }
-          bottomContent={
-            <View>
-              <Button title='Delete Storage' onPress={() => this.save('')} />
-              <Button title='Create Visit' onPress={this.testRequest} />
-            </View>
-          }
-        />
+        <View style={styles.mainView}>
+          <Overlay isVisible={this.state.greenOverlay} fullScreen={true} overlayBackgroundColor='green' overlayStyle={styles.greenOverlay}>
+            <Text style={styles.overlayText}>Erfolgreich registriert!</Text>
+          </Overlay>
+
+          <QRCodeScanner
+            onRead={this.onSuccess}
+            cameraStyle={styles.cameraView}
+            topViewStyle={styles.zeroContainer}
+            bottomViewStyle={styles.zeroContainer}
+          />
+        </View>
       );
     } else {
       return (
@@ -174,6 +178,20 @@ export default class QRona extends Component {
 const styles = StyleSheet.create({
   scrollView: {
     backgroundColor: Colors.lighter,
+  },
+  mainView: {
+    flex: 1,
+  },
+  zeroContainer: {
+    flex: 0,
+    height: 0,
+  },
+  cameraView: {
+    height: Dimensions.get('window').height,
+  },
+  idOverlay: {
+    opacity: 0.8,
+    marginBottom: 30,
   },
   engine: {
     position: 'absolute',
@@ -216,6 +234,16 @@ const styles = StyleSheet.create({
   },
   buttonTouchable: {
     padding: 16
+  },
+  greenOverlay: {
+    opacity: 0.5,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  overlayText: {
+    color: 'white',
+    fontSize: 40,
   },
   footer: {
     color: Colors.dark,
