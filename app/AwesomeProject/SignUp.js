@@ -38,7 +38,7 @@ export default class SignUp extends Component {
                 <Text style={styles.oder}>ODER</Text>
                 <TextInput onChangeText={this.onChangeTel} style={styles.input} placeholder='Telefonnummer' placeholderTextColor='grey'></TextInput>
                 <Button rounded style={styles.button} onPress={this.proceed}>
-                    <Text style={styles.butonText}>Scannen</Text>
+                    <Text style={styles.butonText}>SCANNEN</Text>
                 </Button>
             </View> );
     };
