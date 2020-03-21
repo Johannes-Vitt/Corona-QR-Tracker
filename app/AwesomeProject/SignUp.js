@@ -1,6 +1,6 @@
 import React, { Component } from "react"
-import { TextInput, Text, View, StyleSheet, TouchableOpacity, AsyncStorage, Alert, Image } from "react-native"
-import { Button } from 'react-native-elements';
+import { Container, Header, Content, Button, Text } from 'native-base';
+import { TextInput, View, StyleSheet, TouchableOpacity, AsyncStorage, Alert, Image } from "react-native"
 
 const STORAGE_KEY = '@save_name'
 
@@ -31,13 +31,15 @@ export default class SignUp extends Component {
         return (
             <View style={styles.container}>
                 <Image
-                    style={{width: 150, height: 150, marginBottom: 110}}
+                    style={styles.image}
                     source={require('./ressources/qr-code-green-transparent.png')}
                 />
                 <TextInput onChangeText={this.onChangeEmail} style={styles.input} placeholder='E-Mail Adresse' placeholderTextColor='grey'></TextInput>
                 <Text style={styles.oder}>ODER</Text>
                 <TextInput onChangeText={this.onChangeTel} style={styles.input} placeholder='Telefonnummer' placeholderTextColor='grey'></TextInput>
-                <Button color="#000000"title="Scannen" type="outline" onPress={this.proceed}></Button>
+                <Button rounded style={styles.button} onPress={this.proceed}>
+                    <Text>Scannen</Text>
+                </Button>
             </View> );
     };
 };
@@ -68,8 +70,20 @@ const styles = StyleSheet.create({
         borderColor: '#42EABE'
     },
     button: {
+        backgroundColor: '#42EABE',
+        width: '80%',
+        borderRadius: 10,
+        padding: 11.8,
         fontSize: 50,
-        color: '#42EABE',
-        backgroundColor: '#147efb'
+        marginTop: 40,
+        textAlign: 'center',
+        color: '#A9A9A9',
+        fontSize: 20,
+    },
+    image:{
+        width: 200, 
+        height: 200, 
+        marginBottom: 90, 
+        marginTop: 90
     },
 });
