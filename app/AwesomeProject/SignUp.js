@@ -1,7 +1,6 @@
 import React, { Component } from "react"
 import { TextInput, Text, View, StyleSheet, TouchableOpacity, AsyncStorage, Alert, Image } from "react-native"
 import { Button } from 'react-native-elements';
-import LinearGradient from 'react-native-linear-gradient';
 
 const STORAGE_KEY = '@save_name'
 
@@ -73,10 +72,4 @@ const styles = StyleSheet.create({
         color: '#42EABE',
         backgroundColor: '#147efb'
     },
-    linearGradient: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: '100%'
-    }
 });
