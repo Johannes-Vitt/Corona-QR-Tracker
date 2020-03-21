@@ -1,14 +1,33 @@
 const express = require('express')
 const router = express.Router()
+const Hasher = require('../hasher.js')
 const User = require('../models/user')
+
+// Getting all users
+router.get('/', async (req, res) => {
+    try {
+      const users = await User.find({})
+      res.json(users)
+    } catch (err) {
+      res.status(500).json({ message: err.message })
+    }
+})
 
 // Creating a User
 router.post('/', async (req, res) => {
+    hash = req.body.hash
 
-    mail = req.body.mail || null 
-    tel = req.body.tel || null 
+    delete req.body.hash
 
-    if(mail == null && tel == null) {
+    if(!Hasher(req.body, hash)) {
+        res.status(400).json('auth failed')
+        return   
+    }
+
+    mail = req.body.mail 
+    tel = req.body.tel
+
+    if(mail == undefined && tel == undefined) {
         res.status(400).json('no mail or tel provided')
         return
     }

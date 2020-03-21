@@ -1,14 +1,33 @@
 const express = require('express')
 const router = express.Router()
 const POI = require('../models/poi')
+const Hasher = require('../hasher')
+
+// Getting all pois
+router.get('/', async (req, res) => {
+    try {
+      const pois = await POI.find({})
+      res.json(pois)
+    } catch (err) {
+      res.status(500).json({ message: err.message })
+    }
+})
 
 // Creating a POI
 router.post('/', async (req, res) => {
+    hash = req.body.hash
 
-    mail = req.body.mail || null 
-    tel = req.body.tel || null 
+    delete req.body.hash
 
-    if(mail == null && tel == null) {
+    if(!Hasher(req.body, hash)) {
+        res.status(400).json('auth failed')
+        return   
+    }
+
+    mail = req.body.mail
+    tel = req.body.tel
+
+    if(mail == undefined && tel == undefined) {
         res.status(400).json('no mail or tel provided')
         return
     }

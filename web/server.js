@@ -1,24 +1,40 @@
-require('dotenv').config()
-
+const config = require('dotenv').config()
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 
-const options = {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    autoIndex: true,
-    reconnectTries: Number.MAX_VALUE, // Never stop trying to reconnect
-    reconnectInterval: 500, // Reconnect every 500ms
-    bufferMaxEntries: 0,
-    connectTimeoutMS: 10000, // Give up initial connection after 10 seconds
-    socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
-}
+// mongoose promise
+mongoose.Promise = Promise;
 
-mongoose.connect(process.env.DATABASE_URL, options)
-const db = mongoose.connection
-db.on('error', (error) => console.error(error))
-db.once('open', () => console.log('connected to database'))
+//
+const timeout = ms => new Promise(res => setTimeout(res, ms));
+
+// db connection
+const connectMongoDB = async (attempt = 0) => {
+  const DB_HOST = 'mongo_qrona';
+  const DB_NAME = 'qrona';
+  const DB_PASSWORD = 'qronapw';
+  const DB_PORT = 27017;
+  const DB_USER = 'qrona';
+  try {
+    await mongoose.connect(
+      `mongodb://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`,
+      {
+        useNewUrlParser: true,
+      },
+    );
+    console.info('Connected to database!!!');
+  } catch (err) {
+    console.error('Could not connect to MongoDB: ' + err);
+
+    if (attempt < 10) {
+      await timeout(1000 * attempt * 2);
+      connectMongoDB(++attempt);
+    }
+  }
+};
+
+connectMongoDB()
 
 app.use(express.json())
 
