@@ -15,6 +15,7 @@ import {
   StatusBar,
   AppRegistry,
   StyleSheet,
+  AsyncStorage,
   Linking,
 } from 'react-native';
 
@@ -27,6 +28,8 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
+
+const STORAGE_KEY = '@save_name'
 
 const App: () => React$Node = () => {
   onSuccess = e => {
