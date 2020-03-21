@@ -34,7 +34,9 @@
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
       <a class="navbar-brand js-scroll-trigger" href="#page-top">QRona App</a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+        data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+        aria-label="Toggle navigation">
         Menu
         <i class="fas fa-bars"></i>
       </button>
@@ -44,10 +46,10 @@
             <a class="nav-link js-scroll-trigger" href="#download">App Download</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#features">Register Location</a>
+            <a class="nav-link js-scroll-trigger" href="#features">Ort registrieren</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+            <a class="nav-link js-scroll-trigger" href="#contact">Kontakt</a>
           </li>
         </ul>
       </div>
@@ -59,8 +61,9 @@
       <div class="row h-100">
         <div class="col-lg-7 my-auto">
           <div class="header-content mx-auto">
-            <h1 class="mb-5">Help stopping the spread of COVID-19 by registering public places using QR-Codes!</h1>
-            <a href="#features" class="btn btn-outline btn-xl js-scroll-trigger">Register Location!</a>
+            <h1 class="mb-5">Hilf mit die Verbreitung von COVID-19 zu verlangsamen durch einscannenn von QR-Codes an
+              öffentlichen Orten!</h1>
+            <a href="#features" class="btn btn-outline btn-xl js-scroll-trigger">Ort registrieren!</a>
           </div>
         </div>
         <div class="col-lg-5 my-auto">
@@ -86,8 +89,10 @@
     <div class="container">
       <div class="row">
         <div class="col-md-8 mx-auto">
-          <h2 class="section-heading">Get notified if you may got infected!</h2>
-          <p>Download the app and scan public locations you visit, to know if infected people where at the location at the same time!</p>
+          <h2 class="section-heading">Werde informiert falls du dich angesteckt haben könntest!</h2>
+          <p>Lade die App herunter und scanne QR Codes die an öffentlichen Plätzen (Supermarkt, Artzpraxis, etc.)
+            aushägnen. Sollte jemand postiv getestet werden der sich zur gleichen Zeit wie du an diesem Ort war, wirst
+            du vom zuständigen Gesundheitsamt benachrichtigt!</p>
           <img src="img/Icon_full.png" style="width:200px;height: 200px;" class="img-fluid" alt="">
           <div class="badges">
             <a class="badge-link" href="#"><img src="img/google-play-badge.svg" alt=""></a>
@@ -101,46 +106,50 @@
   <section class="features" id="features">
     <div class="container">
       <div class="section-heading text-center">
-        <h2>Register a public location now!</h2>
-        <p class="text-muted">Print the QR-Code and mount it visible at the location!</p>
+        <h2>Einen öffentlichen Ort registrieren</h2>
+        <p class="text-muted">Drucke einfach den generierten QR Code aus und hänge ihn an einer gut sichtbaren Stelle
+          auf!</p>
         <hr>
       </div>
       <form id="register-location">
         <div class="form-group">
-          <label for="location_name">Location Name</label>
+          <label for="location_name">Name (Beispielsweise "Rewe Garching")</label>
           <input type="" class="form-control" id="location_name" aria-describedby="emailHelp">
         </div>
         <div class="form-group">
-          <label for="location_ref">Google Maps Link or Address of Location</label>
+          <label for="location_ref">Link zu Google Maps oder Adresse</label>
           <input type="" class="form-control" id="location_ref" aria-describedby="emailHelp">
         </div>
         <div class="form-group">
-          <label for="phone_email">Email address or Phone number</label>
+          <label for="phone_email">Email addresse oder Telefonnummer</label>
           <input type="" class="form-control" id="phone_email" aria-describedby="emailHelp">
-          <small id="emailHelp" class="form-text text-muted">Will be forwarded to the health authorities if someone got infected.</small>
+          <small id="emailHelp" class="form-text text-muted">Zur Weitergabe an die zuständigen Behörden benötigt, falls
+            ein Fall auftreten sollte.</small>
         </div>
         <div class="form-group">
-          <label for="phone_email">Category</label>
+          <label for="phone_email">Kategorie</label>
           <select id="category-select" class="form-control">
-            <option>Supermarket</option>
-            <option>Restaurant</option>
-            <option>Pharmacy</option>
+            <option>Supermarkt</option>
+            <option>Gastronomie</option>
+            <option>Apotheke</option>
             <option>Outdoor</option>
+            <option>Sonstiges</option>
           </select>
         </div>
-        <button type="submit" class="button-outline-my btn btn-outline">Register</button>
+        <button type="submit" class="button-outline-my btn btn-outline">Registrieren</button>
       </form>
       <style>
         .button-outline-my {
           margin-top: 20px;
-          padding-right: 15px !important; 
-          padding-left: 15px !important; 
-          border-color: #0099ff !important; 
+          padding-right: 15px !important;
+          padding-left: 15px !important;
+          border-color: #0099ff !important;
           color: #0099ff !important;
         }
+
         .button-outline-my:hover {
-          border-color: #0099ff !important; 
-          background-color: #0099ff !important; 
+          border-color: #0099ff !important;
+          background-color: #0099ff !important;
           color: #fff !important;
         }
       </style>
@@ -148,9 +157,12 @@
         <div id="show-qr" class="card mx-auto col-6" style="width: 18rem; padding:20px; display: none;">
           <img id="preview-qr" src="" style="max-width: 200px; padding: 20px;" class="card-img-top" alt="...">
           <div class="card-body">
-            <h5 class="card-title">Your Location QR-Code</h5>
-            <p class="card-text">Your Location Code is <b id="code-label">undefined</b>. Please print the downloadable pdf and print it. Attach it at the public location in a visible manner.</p>
-          <a href="#features" id="reset-form" class="button-outline-my btn btn-outline js-scroll-trigger">Back</a>
+            <h5 class="card-title">QR-Code für deinen Ort</h5>
+            <p class="card-text">Der QR Code für deinen Ort ist <b id="code-label">nicht definiert</b>. Bitte lade das
+              PDF herunter und drucke die Datei aus. Hänge den Code (eventuell sogar in mehrfacher Ausführung) gut
+              sichtbar an dem Ort auf. Bitte sorge für genug Platz, sodass mehrere Leute den Code einscannen können ohne
+              sich zu Nahe zu kommen!</p>
+            <a href="#features" id="reset-form" class="button-outline-my btn btn-outline js-scroll-trigger">Zurück</a>
           </div>
         </div>
         <div style="display: none;" id="qr-code">
@@ -216,8 +228,8 @@
   <section class="cta">
     <div class="cta-content">
       <div class="container">
-        <h2>You think you're infected?<br>Get help now!</h2>
-        <a href="#contact" class="btn btn-outline btn-xl js-scroll-trigger">Contact your local health authority!</a>
+        <h2>Du befürchtest infiziert zu sein?</h2>
+        <a href="#contact" class="btn btn-outline btn-xl js-scroll-trigger">Hier gibts weitere Infos!</a>
       </div>
     </div>
     <div class="overlay"></div>
@@ -225,7 +237,7 @@
 
   <section class="contact bg-primary" id="contact">
     <div class="container">
-      <h2>We fight the Virus! </br>Created during We-Vs-Virus Hackathon</h2>
+      <h2>Gemeinsam gegen den Virus!</br>Projekt des "We-Vs-Virus" Hackathons</h2>
       <!--<ul class="list-inline list-social">
         <li class="list-inline-item social-twitter">
           <a href="#">
@@ -248,16 +260,16 @@
 
   <footer>
     <div class="container">
-      <p>&copy; QRona 2020. All Rights Reserved.</p>
+      <p>&copy; QRona 2020. Alle Rechte .</p>
       <ul class="list-inline">
         <li class="list-inline-item">
-          <a href="#">Privacy</a>
+          <a href="https://devpost.com/software/corona-qr-tracker">Devpost</a>
         </li>
         <li class="list-inline-item">
-          <a href="#">Terms</a>
+          <a href="https://github.com/Johannes-Vitt/Corona-QR-Tracker">GitHub</a>
         </li>
         <li class="list-inline-item">
-          <a href="#">FAQ</a>
+          <a href="https://wirvsvirushackathon.org/">WIRVSVIRUS - Hackathon</a>
         </li>
       </ul>
     </div>
