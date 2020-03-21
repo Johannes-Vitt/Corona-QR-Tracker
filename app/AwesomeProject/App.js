@@ -96,10 +96,12 @@ export default class QRona extends Component {
           hash: hash,
         }),
       });
-      responseJSON = await reponse.json();
-      alert(JSON.stringify(responseJSON));
+      responseJSON = await reponse;
+      console.log(responseJSON);
+      return responseJSON;
     } catch (e) {
-      alert('Failed to create Visit')
+      alert('Ups, da ist leider etwas schief gelaufen. Versuche es später erneut.')
+      return undefined;
     }
   }
 
@@ -130,7 +132,8 @@ export default class QRona extends Component {
       responseJSON = await reponse.json();
       this.save(responseJSON.code);
     } catch (e) {
-      alert('Failed to create User')
+      alert('Ups, da ist leider etwas schief gelaufen. Versuche es später erneut.')
+      return undefined;
     }
   }
 
@@ -138,12 +141,15 @@ export default class QRona extends Component {
   testRequest = () => {
     this.createVisit('1234', '31324');
   }
-  onSuccess = e => {
-    this.createVisit(this.state.id, e.data);
-    this.setState({ id: this.state.id, greenOverlay: true });
-    setTimeout(function () {
-      this.setState({ id: this.state.id, greenOverlay: false });
-    }.bind(this), 500)
+  onSuccess = async e => {
+    let response = await this.createVisit(this.state.id, e.data).then(response => { return response });
+    console.log(response);
+    if (response) {
+      this.setState({ id: this.state.id, greenOverlay: true });
+      setTimeout(function () {
+        this.setState({ id: this.state.id, greenOverlay: false });
+      }.bind(this), 1500)
+    }
   };
 
 
@@ -163,7 +169,12 @@ export default class QRona extends Component {
             cameraStyle={styles.cameraView}
             topViewStyle={styles.zeroContainer}
             bottomViewStyle={styles.zeroContainer}
+            reactivate={true}
+            reactivateTimeout={4000}
           />
+          <View style={styles.idOverlay}>
+            <Text style={styles.whiteFont}>Deine ID: {this.state.id}</Text>
+          </View>
         </View>
       );
     } else {
@@ -179,8 +190,13 @@ const styles = StyleSheet.create({
   scrollView: {
     backgroundColor: Colors.lighter,
   },
+  whiteFont: {
+    color: 'black',
+    fontSize: 30,
+  },
   mainView: {
     flex: 1,
+    alignItems: 'center',
   },
   zeroContainer: {
     flex: 0,
@@ -190,8 +206,17 @@ const styles = StyleSheet.create({
     height: Dimensions.get('window').height,
   },
   idOverlay: {
+    padding: 5,
+    paddingLeft: 20,
+    paddingRight: 20,
+    justifyContent: 'center',
+    borderRadius: 7,
+    position: 'absolute',
     opacity: 0.8,
-    marginBottom: 30,
+    zIndex: 100,
+    bottom: 40,
+    color: 'white',
+    backgroundColor: 'white',
   },
   engine: {
     position: 'absolute',
@@ -243,6 +268,7 @@ const styles = StyleSheet.create({
   },
   overlayText: {
     color: 'white',
+    opacity: 1,
     fontSize: 40,
   },
   footer: {
