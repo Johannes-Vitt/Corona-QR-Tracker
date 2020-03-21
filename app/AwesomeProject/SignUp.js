@@ -20,6 +20,7 @@ export default class SignUp extends Component {
     proceed = () => {
         if (this.state.email !== '' || this.state.tel !== '') {
             //TODO get the ID from the API
+            this.props.createUser({ tel: this.state.tel, mail: this.state.email });
             const id = '21313123';
             this.props.save(id)
         } else {

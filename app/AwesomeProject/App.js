@@ -31,14 +31,15 @@ import {
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
 
+import { sha256 } from 'react-native-sha256';
+
 import SignUp from './SignUp';
 
 const STORAGE_KEY = '@save_name'
 
 export default class QRona extends Component {
-  // TODO: remove text
+
   state = {
-    text: '',
     id: '',
   }
 
@@ -67,29 +68,80 @@ export default class QRona extends Component {
     }
   }
 
-  // TODO: remove
-  onChangeText = text => this.setState({ text })
+  createVisit = async (user_id, poi_id) => {
+    try {
+      const secret = 'qrona_app';
+      const stringToHash =
+        secret + JSON.stringify({
+          uid: user_id,
+          pid: poi_id,
+        }) + secret;
+      let hash = await sha256(stringToHash).then(hash => {
+        return hash;
+      })
 
-  // TODO: remove
-  onSubmitEditing = () => {
-    const onSave = this.save
-    const { text } = this.state
-
-    if (!text) return
-
-    onSave(text)
-    this.setState({ text: '' })
+      let reponse = await fetch('http://192.168.0.117:2222/api/view', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          uid: user_id,
+          pid: poi_id,
+          hash: hash,
+        }),
+      });
+      responseJSON = await reponse.json();
+      alert(JSON.stringify(responseJSON));
+    } catch (e) {
+      alert('Failed to create Visit')
+    }
   }
 
+  createUser = async user => {
+    try {
+      const secret = 'qrona_app';
+      const stringToHash =
+        secret + JSON.stringify({
+          tel: user.tel,
+          mail: user.mail,
+        }) + secret;
+      let hash = await sha256(stringToHash).then(hash => {
+        return hash;
+      })
+
+      let reponse = await fetch('http://192.168.0.117:2222/api/user', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          tel: user.tel,
+          mail: user.mail,
+          hash: hash,
+        }),
+      });
+      responseJSON = await reponse.json();
+      this.save(responseJSON.code);
+    } catch (e) {
+      alert('Failed to create User')
+    }
+  }
+
+  // TODO: remove
+  testRequest = () => {
+    this.createVisit('1234', '31324');
+  }
   onSuccess = e => {
-    Linking.openURL(e.data).catch(err =>
-      console.error('An error occured', err)
-    );
+    this.createVisit(this.state.id, e.data);
   };
 
 
   render() {
-    const { text, id } = this.state;
+    const id = this.state.id;
+
 
     if (id !== '') {
       return (
@@ -105,13 +157,14 @@ export default class QRona extends Component {
           bottomContent={
             <View>
               <Button title='Delete Storage' onPress={() => this.save('')} />
+              <Button title='Create Visit' onPress={this.testRequest} />
             </View>
           }
         />
       );
     } else {
       return (
-        <SignUp save={this.save} ></SignUp>
+        <SignUp save={this.save} createUser={this.createUser}></SignUp>
       );
     }
   }
