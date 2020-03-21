@@ -13,8 +13,14 @@ services:
     app:
         container_name: qrona
         restart: always
-        build: .
+        build: ./backend
         ports:
         - "2222:3000"
         links:
         - mongo_qrona
+    poi_front:
+      container_name: poi_qrona
+      restart: always
+      build: ./poi_frontend
+      ports:
+      - "2000:3000"
