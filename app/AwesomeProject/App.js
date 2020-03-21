@@ -12,6 +12,7 @@ import {
   ScrollView,
   View,
   Text,
+  Button,
   TextInput,
   StatusBar,
   AppRegistry,
@@ -29,6 +30,8 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
+
+import SignUp from './SignUp';
 
 const STORAGE_KEY = '@save_name'
 
@@ -58,7 +61,6 @@ export default class QRona extends Component {
   save = async id => {
     try {
       await AsyncStorage.setItem(STORAGE_KEY, id)
-      alert('Data successfully saved!')
       this.setState({ id })
     } catch (e) {
       alert('Failed to save id.')
@@ -86,9 +88,8 @@ export default class QRona extends Component {
   };
 
 
-
   render() {
-    const { text, id } = this.state
+    const { text, id } = this.state;
 
     if (id !== '') {
       return (
@@ -103,31 +104,18 @@ export default class QRona extends Component {
           }
           bottomContent={
             <View>
-              <TextInput
-                style={styles.centerText}
-
-                placeholder='Type your id, hit enter, and refresh'
-                onChangeText={this.onChangeText}
-                onSubmitEditing={this.onSubmitEditing}
-              />
+              <Button title='Delete Storage' onPress={() => this.save('')} />
             </View>
           }
         />
       );
     } else {
       return (
-        <View>
-          <TextInput
-            style={styles.centerText}
-
-            placeholder='Type your id, hit enter, and refresh'
-            onChangeText={this.onChangeText}
-            onSubmitEditing={this.onSubmitEditing}
-          />
-        </View>
+        <SignUp save={this.save} ></SignUp>
       );
     }
   }
+
 }
 
 const styles = StyleSheet.create({
