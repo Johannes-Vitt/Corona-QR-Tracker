@@ -6,7 +6,7 @@
  * @flow
  */
 
-import React from 'react';
+import React, { Component } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -28,30 +28,33 @@ import {
 
 import QRCodeScanner from 'react-native-qrcode-scanner';
 
-const App: () => React$Node = () => {
+export default class QRona extends Component {
   onSuccess = e => {
     Linking.openURL(e.data).catch(err =>
       console.error('An error occured', err)
     );
   };
-  return (
-    <QRCodeScanner
-      onRead={this.onSuccess}
-      topContent={
-        <Text style={styles.centerText}>
-          Go to{' '}
-          <Text style={styles.textBold}>wikipedia.org/wiki/QR_code</Text> on
-            your computer and scan the QR code.
+
+  render() {
+    return (
+      <QRCodeScanner
+        onRead={this.onSuccess}
+        topContent={
+          <Text style={styles.centerText}>
+            Go to{' '}
+            <Text style={styles.textBold}>wikipedia.org/wiki/QR_code</Text> on
+            your computer and scan the QRRRRRR code.
           </Text>
-      }
-      bottomContent={
-        <View>
-          <Text style={styles.buttonText}>OK. Got it!</Text>
-        </View>
-      }
-    />
-  );
-};
+        }
+        bottomContent={
+          <View>
+            <Text style={styles.buttonText}>OK. Got it!</Text>
+          </View>
+        }
+      />
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   scrollView: {
@@ -108,5 +111,3 @@ const styles = StyleSheet.create({
     textAlign: 'right',
   },
 });
-
-export default App;
