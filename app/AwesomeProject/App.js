@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 7,
     position: 'absolute',
-    opacity: 0.8,
+    opacity: 0.4,
     zIndex: 100,
     bottom: 40,
     color: 'white',
