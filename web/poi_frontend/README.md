@@ -5,8 +5,8 @@
 ## QRona - App
 We used this wonderful under MIT licensed Bootstrap Theme to create our landing page and the form to register point of interests (POI)
 
-- Most code from us can be find in js/new-age.js and index.html 
-- We just adjusted the things that wee need for our use-case
+- Most code from us can be found in js/new-age.js and index.html 
+- We just adjusted a few things that wee needed for our use-case
 - We dockerized the App running on port 3000 in the docker container 
 - We used [jsPDF](https://github.com/MrRio/jsPDF) to generate the pdf
 - we used  [qrcode.js](https://davidshimjs.github.io/qrcodejs/) to generate the qr-code
