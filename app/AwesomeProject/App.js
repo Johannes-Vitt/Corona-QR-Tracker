@@ -299,6 +299,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   overlayText: {
+    textAlign: 'center',
     color: 'white',
     opacity: 1,
     fontSize: 40,
