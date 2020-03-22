@@ -20,7 +20,7 @@ export default class SignUp extends Component {
 
     proceed = () => {
         if (this.state.email !== '' || this.state.tel !== '') {
-            //TODO get the ID from the API
+            console.log('creating a new user');
             this.props.createUser({ tel: this.state.tel, mail: this.state.email });
         } else {
             Alert.alert("Informationen unvollständig", "Bitte E-Mail Adresse oder Telefonnummer eingeben!");
@@ -34,9 +34,9 @@ export default class SignUp extends Component {
                     style={styles.image}
                     source={require('./ressources/Logo_new.png')}
                 />
-                <TextInput onChangeText={this.onChangeEmail} style={styles.input} placeholder='E-Mail Adresse' placeholderTextColor='grey'></TextInput>
+                <TextInput keyboardType="email-address" onChangeText={this.onChangeEmail} style={styles.input} placeholder='E-Mail Adresse' placeholderTextColor='grey'></TextInput>
                 <Text style={styles.oder}>ODER</Text>
-                <TextInput onChangeText={this.onChangeTel} style={styles.input} placeholder='Telefonnummer' placeholderTextColor='grey'></TextInput>
+                <TextInput keyboardType="phone-pad" returnKeyType='done' onChangeText={this.onChangeTel} style={styles.input} placeholder='Telefonnummer' placeholderTextColor='grey'></TextInput>
                 <Button style={styles.button} onPress={this.proceed}>
                     <Text style={styles.buttonText}>SCANNEN</Text>
                 </Button>

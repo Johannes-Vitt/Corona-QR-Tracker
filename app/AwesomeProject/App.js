@@ -20,6 +20,7 @@ import {
   AsyncStorage,
   Linking,
   Dimensions,
+  Image,
 } from 'react-native';
 
 import {
@@ -84,7 +85,7 @@ export default class QRona extends Component {
         return hash;
       })
 
-      let reponse = await fetch('http://192.168.0.117:2222/api/view', {
+      let reponse = await fetch('http://35.198.123.229:2222/api/view', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -116,8 +117,9 @@ export default class QRona extends Component {
       let hash = await sha256(stringToHash).then(hash => {
         return hash;
       })
-
-      let reponse = await fetch('http://192.168.0.117:2222/api/user', {
+      console.log(hash);
+      console.log(JSON.stringify(user));
+      let reponse = await fetch('http://35.198.123.229:2222/api/user', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -130,6 +132,7 @@ export default class QRona extends Component {
         }),
       });
       responseJSON = await reponse.json();
+      console.log(responseJSON);
       this.save(responseJSON.code);
     } catch (e) {
       alert('Ups, da ist leider etwas schief gelaufen. Versuche es später erneut.')
@@ -155,7 +158,7 @@ export default class QRona extends Component {
 
   render() {
     const id = this.state.id;
-
+    console.disableYellowBox = true;
 
     if (id !== '') {
       return (
@@ -172,6 +175,10 @@ export default class QRona extends Component {
             reactivate={true}
             reactivateTimeout={4000}
           />
+          <View style= {styles.qrOverlay}>
+          <Image source={require('./ressources/scanner_frame.png')} style={styles.backgroundImage}>
+          </Image>
+          </View>
           <View style={styles.idOverlay}>
             <Text style={styles.whiteFont}>Deine ID: {this.state.id}</Text>
           </View>
@@ -179,7 +186,7 @@ export default class QRona extends Component {
       );
     } else {
       return (
-        <SignUp save={this.save} createUser={this.createUser}></SignUp>
+        <SignUp createUser={this.createUser}></SignUp>
       );
     }
   }
@@ -187,6 +194,31 @@ export default class QRona extends Component {
 }
 
 const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+      width: null,
+      height: null,
+  },
+  qrOverlay: {
+    borderRadius:45,
+    width: 300,
+    height: 300,
+    justifyContent: 'center',
+    position: 'absolute',
+    opacity: 0.6,
+    zIndex: 100,
+    flexDirection: 'column',
+    top: '30%'
+  },
+  overlay: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    backgroundColor: 'red',
+    opacity: 0.3
+  },
   scrollView: {
     backgroundColor: Colors.lighter,
   },
@@ -212,7 +244,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 7,
     position: 'absolute',
-    opacity: 0.8,
+    opacity: 0.4,
     zIndex: 100,
     bottom: 40,
     color: 'white',
@@ -267,6 +299,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   overlayText: {
+    textAlign: 'center',
     color: 'white',
     opacity: 1,
     fontSize: 40,
