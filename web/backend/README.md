@@ -1,3 +1,11 @@
+# Used Open Source Projects
+- node.js [github](https://github.com/nodejs/nodejs.org)
+- express.js ```CC``` [github](https://github.com/expressjs/expressjs.com)
+- mongoDB [website](https://www.mongodb.com/de)
+- mongoose ```MIT``` [github](https://github.com/Automattic/mongoose)
+- nodemon ```MIT``` [github](https://github.com/remy/nodemon/)
+
+
 # API Documentation 
 - API Secret: qrona_app
 
