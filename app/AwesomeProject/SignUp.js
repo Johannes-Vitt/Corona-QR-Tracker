@@ -36,7 +36,7 @@ export default class SignUp extends Component {
                 />
                 <TextInput onChangeText={this.onChangeEmail} style={styles.input} placeholder='E-Mail Adresse' placeholderTextColor='grey'></TextInput>
                 <Text style={styles.oder}>ODER</Text>
-                <TextInput onChangeText={this.onChangeTel} style={styles.input} placeholder='Telefonnummer' placeholderTextColor='grey'></TextInput>
+                <TextInput keyboardType="numeric" onChangeText={this.onChangeTel} style={styles.input} placeholder='Telefonnummer' placeholderTextColor='grey'></TextInput>
                 <Button style={styles.button} onPress={this.proceed}>
                     <Text style={styles.buttonText}>SCANNEN</Text>
                 </Button>
