@@ -176,7 +176,7 @@ export default class QRona extends Component {
             reactivateTimeout={4000}
           />
           <View style= {styles.qrOverlay}>
-          <Image source={require('./ressources/qr-code-green-transparent.png')} style={styles.backgroundImage}>
+          <Image source={require('./ressources/scanner_frame.png')} style={styles.backgroundImage}>
           </Image>
           </View>
           <View style={styles.idOverlay}>
