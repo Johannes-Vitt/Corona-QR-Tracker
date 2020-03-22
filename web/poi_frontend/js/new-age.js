@@ -61,6 +61,11 @@
 
   }
 
+  $('#download-form').click(function() {
+    var code = $('#code-label').text()
+    genQR(code, 'qr-code')
+  })
+
   $("#register-location").submit(function (event) {
     var title = $('#location_name').val()
     var mail = $('#phone_email').val()
