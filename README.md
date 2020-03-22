@@ -19,6 +19,12 @@ To run the app on android, run
 
 while having your android phone connected and usb debugging enabled.
 
+### iOS-App
+This is a react-native app. Please read [here](https://reactnative.dev/) on how to install React Native. 
+
+Informations on how to install the app can be found [here](https://reactnative.dev/docs/getting-started).
+
+
 ### WebApp
 
 - clone the repository
