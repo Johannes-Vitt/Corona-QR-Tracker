@@ -20,7 +20,7 @@ export default class SignUp extends Component {
 
     proceed = () => {
         if (this.state.email !== '' || this.state.tel !== '') {
-            //TODO get the ID from the API
+            console.log('creating a new user');
             this.props.createUser({ tel: this.state.tel, mail: this.state.email });
         } else {
             Alert.alert("Informationen unvollständig", "Bitte E-Mail Adresse oder Telefonnummer eingeben!");

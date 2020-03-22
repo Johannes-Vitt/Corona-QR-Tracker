@@ -84,7 +84,7 @@ export default class QRona extends Component {
         return hash;
       })
 
-      let reponse = await fetch('http://192.168.0.117:2222/api/view', {
+      let reponse = await fetch('http://35.198.123.229:2222/api/view', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -116,8 +116,9 @@ export default class QRona extends Component {
       let hash = await sha256(stringToHash).then(hash => {
         return hash;
       })
-
-      let reponse = await fetch('http://192.168.0.117:2222/api/user', {
+      console.log(hash);
+      console.log(JSON.stringify(user));
+      let reponse = await fetch('http://35.198.123.229:2222/api/user', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -130,6 +131,7 @@ export default class QRona extends Component {
         }),
       });
       responseJSON = await reponse.json();
+      console.log(responseJSON);
       this.save(responseJSON.code);
     } catch (e) {
       alert('Ups, da ist leider etwas schief gelaufen. Versuche es später erneut.')
@@ -179,7 +181,7 @@ export default class QRona extends Component {
       );
     } else {
       return (
-        <SignUp save={this.save} createUser={this.createUser}></SignUp>
+        <SignUp createUser={this.createUser}></SignUp>
       );
     }
   }
