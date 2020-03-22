@@ -49,7 +49,7 @@
       var doc = new jsPDF("h", "mm", "a4")
       centeredText(doc, 'Standort ID: ' + code, 175)
       centeredText(doc, 'App herunterladen unter', 250)
-      centeredText(doc, 'https://www.qrona.app/#download', 257)
+      centeredText(doc, 'https://www.qrona.de/#download', 257)
       doc.addImage(src, 45, 45, 120, 120)
       doc.setFontSize(40)
       centeredText(doc, 'SCAN MICH', 30)
@@ -69,7 +69,7 @@
 
     var data = { mail: mail, title: title, location: location, category: category }
 
-    $.ajax('http://localhost:2222/api/poi', {
+    $.ajax('http://qrona.de:2222/api/poi', {
       'data': JSON.stringify(data),
       'type': 'POST',
       'processData': false,

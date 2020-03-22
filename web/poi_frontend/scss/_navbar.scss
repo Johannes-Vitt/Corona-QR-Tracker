@@ -23,7 +23,7 @@
                 font-size: 11px;
                 @include alt-font;
                 &.active {
-                    color: $theme-primary !important;
+                    color: $theme-secondary !important;
                     background-color: transparent;
                     &:hover {
                         background-color: transparent;
@@ -46,7 +46,7 @@
             color: fade(white, 70%);
             &:hover,
             &:focus {
-                color: white;
+                color: $theme-secondary;
             }
         }
         .navbar-nav > li > a,
@@ -63,14 +63,14 @@
                 color: $gray-darker;
                 &:hover,
                 &:focus {
-                    color: $theme-primary;
+                    color: $theme-secondary;
                 }
             }
             .navbar-nav > li > a,
             .navbar-nav > li > a:focus {
                 color: $gray-darker;
                 &:hover {
-                    color: $theme-primary;
+                    color: $theme-secondary;
                 }
             }
         }
