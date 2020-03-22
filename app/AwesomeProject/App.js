@@ -155,7 +155,7 @@ export default class QRona extends Component {
 
   render() {
     const id = this.state.id;
-
+    console.disableYellowBox = true;
 
     if (id !== '') {
       return (
