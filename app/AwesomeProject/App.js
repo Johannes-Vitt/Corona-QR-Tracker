@@ -20,6 +20,7 @@ import {
   AsyncStorage,
   Linking,
   Dimensions,
+  Image,
 } from 'react-native';
 
 import {
@@ -174,6 +175,10 @@ export default class QRona extends Component {
             reactivate={true}
             reactivateTimeout={4000}
           />
+          <View style= {styles.qrOverlay}>
+          <Image source={require('./ressources/qr-code-green-transparent.png')} style={styles.backgroundImage}>
+          </Image>
+          </View>
           <View style={styles.idOverlay}>
             <Text style={styles.whiteFont}>Deine ID: {this.state.id}</Text>
           </View>
@@ -189,6 +194,31 @@ export default class QRona extends Component {
 }
 
 const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+      width: null,
+      height: null,
+  },
+  qrOverlay: {
+    borderRadius:45,
+    width: 300,
+    height: 300,
+    justifyContent: 'center',
+    position: 'absolute',
+    opacity: 0.6,
+    zIndex: 100,
+    flexDirection: 'column',
+    top: '30%'
+  },
+  overlay: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    backgroundColor: 'red',
+    opacity: 0.3
+  },
   scrollView: {
     backgroundColor: Colors.lighter,
   },
